@@ -7,13 +7,11 @@
 
 ## Team Members
 
-<< List team member names >>
-
-***
+Noah Gell
 
 ## Project Description
 
-<< Give an overview of your project >>
+A typing game and test. There will be a menu screen allowing users to select the test or the game or to exit. After a test or game is completed, another menu screen Users will haev the ability to modify the test, for example how long the test is, and whether capitals and punctuation will be used. 
 
 ***    
 
@@ -30,12 +28,14 @@
 ## Program Design
 
 ### Features
-
-1. << Feature 1 >>
-2. << Feature 2 >>
-3. << Feature 3 >>
-4. << Feature 4 >>
-5. << Feature 5 >>
+ 
+1. Menu screen 
+2. Test measures wpm
+3. Test measures accuracy
+4. Abililty to turn of punctuation and casing for the test
+5. Ability to make the test shorter or longer
+6. Scores recorded, saved, and graphed to show typing speed progress over time.
+7. graphic or animation showing how far along you are in the paragraph
 
 ### Classes
 
