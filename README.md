@@ -30,13 +30,16 @@ The test also has "Stats" screen accesible from the main menu, which was suppose
 
 ### Features
  
-1. Menu screen 
-2. Test measures wpm
-3. Test measures accuracy
-4. Abililty to turn of punctuation and casing for the test
-5. Ability to make the test shorter or longer
-6. Scores recorded, saved, and graphed to show typing speed progress over time.
-7. graphic or animation showing how far along you are in the paragraph
+1. Menu and pause screen 
+2. Test measures wpm (unsuccesful)
+3. Test measures accuracy (unsucesful)
+4. Abililty to turn of punctuation and casing for the test (unsucessful)
+5. Ability to make the test shorter or longer (unsucessful)
+6. Scores recorded, saved, and graphed to show typing speed progress over time. (unsuccesful)
+7. colors display how far you are along in the sentence
+8. typed sentence appears below the given sentence
+9. the sentences are taken from a text
+
 
 ### Classes
 
