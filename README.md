@@ -51,7 +51,9 @@ The test also has "Stats" screen accesible from the main menu, which was suppose
 
 - pauseS: this is the pause screen state, draws a screen with buttons, its buttons change to the "testScreen" and "startMenu" state respectively.
 
-- testScreen: this is the main game state. it also draws a screen with buttons. this state is the condition to trigger the eventloop in the controller. 
+- testScreen: this is the main game state. it also draws a screen with buttons. this state is the condition to trigger the eventloop in the controller.
+
+- -gamestates: this class controls the gamestates and contains two methods, one which gets the current game state and another which updates it. 
 
 ### Additional modules
 
