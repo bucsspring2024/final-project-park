@@ -1,45 +1,55 @@
-# these will be imported into the controller
+
 import pygame
-import sys
 import string
-import nltk
 from nltk.tokenize import sent_tokenize
 from nltk import word_tokenize
 import random
-width = 800 
-height = 500
-char = ['a','b','c','d','e','f','g','h','i','j','k','l',
+
+HEIGHT = 500
+WIDTH = 800
+
+CHAR = ['a','b','c','d','e','f','g','h','i','j','k','l',
 'm','n','o','p','q','r','s','t','u','v','w','x','y','z','A',
 'B','C','D','E','F','G','H','I','J','K','L','M','N','O','P',
 'Q','R','S','T','U','V','W','X','Y','Z','.',',',':',';','!', ' ']
 
 class sentence_generator:
+        '''
+        descrip: this class reads text from a text file, tokenizes the whole thing into sentences
+        using nltk, chooses sentences at random of a certain length and modifies their length,
+        punctuation, and capitlization. (ideally).
+        attributes:
+        punc = given True or False representing whether or not the finished sentence will have punctuation
+        cap = True or False for captilizaiton. 
+        methods:
+        generate: the file reading, tokenizing, and modification happens in this method. 
+        '''
         def __init__(self, punc,cap):
             self.punc = punc
             self.cap = cap
         def generate(self):
-            with open('maninthehighcastle.txt') as file:
-                raw_text = file.read()
-            list = sent_tokenize(raw_text)
-            sorted_list = []
-            for i in list:
+            with open('assets/maninthehighcastle.txt') as file:
+                rawtext = file.read()
+            sentencelist = sent_tokenize(rawtext)
+            sortedlist = []
+            for i in sentencelist:
                 if len(i) > 60:
-                    sorted_list.append(i)
+                    sortedlist.append(i)
 
-            sent = random.choice(sorted_list)
+            sentence = random.choice(sortedlist)
             if self.punc == False:
                 remove_punct = str.maketrans("", "", string.punctuation)
-                sent = sent.translate(remove_punct)
-                sent = sent.translate(remove_punct)
-                dashremove = sent.split("â€”")
-                sent = " ".join(dashremove)
+                sentence = sentence.translate(remove_punct)
+                sentence = sentence.translate(remove_punct)
+                dashremove = sentence.split("â€”")
+                sentence = " ".join(dashremove)
             
             if self.cap == False:
-                sent = sent.lower()
+                sentence = sentence.lower()
             else:
-                sent = sent.capilize()
+                sentence = sentence.capitalize()
 
-            wordlist = word_tokenize(sent)
+            wordlist = word_tokenize(sentence)
             sent1 = " ".join(wordlist[:10])
             # sent2 =" ".join(wordlist[11:20])
             # sent3 = " ".join(wordlist[21:31])
@@ -48,6 +58,26 @@ class sentence_generator:
 
 
 class buttons:
+    '''
+    description: this class draws buttons on the screen and is able to return whether or not theyre
+    in the "up" or "down" state. 
+    
+    attributes:
+    x = x coordinate for top left of button
+    y = y coordinate for top left of button
+    type = there are two types used in this program, this value corresponds to the area of the button
+    font = the font used on the button, only one is used
+    text = the text that will be blitted upon the button
+    surface = the surface the buttons will be blit onto, the screen. 
+    
+    methods:
+    draw: draws the buttons, changes color if hovered or click
+    btnclick: returns whether the button is in the up or down state
+    cstat: returns whether the button has been clicked since last draw()
+    erase: erases from screen 
+
+
+    '''
     def __init__(self, x, y, type, font, text, surface): #take state parameter out of button calls
         self.x = x
         self.y = y
@@ -96,21 +126,33 @@ class buttons:
         pygame.draw.rect(self.surface, "black", (self.x,self.y, self.type[0], self.type[1]))
 
 class testScreen:
+    '''
+    description: this is the gamestate on which the main game takes place. this state 
+    draws a screen with buttons, generates sentences, and contains the event loop for typing on the screen.
+     
+    arguments:
+    screen: the screen
+    state: the gamestate
+
+    methods:run
+    draws the screen, buttons, generates sentences, blits them on screen, manages events for 
+    typing 
+    '''
     def __init__(self, screen, state):
         self.state = state
         self.screen = screen
         self.pause = True
         self.running = True
         self.font = pygame.font.SysFont('mspgothic', 16)
-        self.cindex = 0 
+ 
 
     def run(self):
 
         #drawing the screen 
         self.screen.fill('black')
         
-        pygame.draw.rect(self.screen,"darkblue",(650, 0, 150, height) )
-        pygame.draw.rect(self.screen,"grey",(650, 0, 150,height),2)
+        pygame.draw.rect(self.screen,"darkblue",(650, 0, 150,HEIGHT) )
+        pygame.draw.rect(self.screen,"grey",(650, 0, 150,HEIGHT),2)
         pygame.draw.rect(self.screen,"darkblue",(0, 400, 650,100) )
         pygame.draw.rect(self.screen,"grey",(0, 400, 650,100), 2)
     
@@ -125,17 +167,31 @@ class testScreen:
         
         #function to update all
         def draw_all():
+            '''description: this funciton updates the buttons within the above list
+            it uses the draw method from the buttons class. 
+            '''
             for i in self.lisb:
                 i.draw()
 
         #function to update what the user has typed  
         def typedblit(self, typed):
+            '''description: this draws what the user has typed on the blue lower part of the screen 
+            args:
+            typed: a string containing what the user has typed, updated for every keydown event.
+            '''
             pygame.draw.rect(self.screen,"darkblue",(0, 400, 650,100) )
             pygame.draw.rect(self.screen,"grey",(0, 400, 650,100), 2)
             self.screen.blit(self.font.render(typed, True, "green"), (200-(len(typed)),440))
         
         #function to blit the random sentence along with what the user has correctly typed
         def lineblit(self, newline, typed):
+            '''description: this blits the generated line on the screen, and controls what color
+            it is by comparing it to what the user has typed. 
+            args:
+            newline, the line generated generate sentnces class 
+            typed: what the user has typed
+
+            '''
             xvar = 54
             yvar = 180 
             len_typed = len(typed)
@@ -178,7 +234,8 @@ class testScreen:
         punc = True
         cap = False
         typed = ''
-        lastcapclick = pygame.time.get_ticks() 
+        lastclick = pygame.time.get_ticks()
+ 
         
 
         while self.running:
@@ -202,15 +259,14 @@ class testScreen:
                 if event.type == pygame.QUIT:
                     quit = True
                     self.running = False
-                staygreen = []
                 if incomp and event.type == pygame.KEYDOWN: 
 
                     pygame.draw.rect(self.screen, "black",(300,100,180,40))
                     starttoggle = False
-                    ty = lineblit(self, newline, typed)
-                    staygreen.append(ty)
+                    lineblit(self, newline, typed)
+
                     
-                    if event.unicode in char:
+                    if event.unicode in CHAR:
                         #should start the timer here 
                         typed += event.unicode
     
@@ -266,6 +322,16 @@ class testScreen:
 
 
 class startMenu:
+    ''' description: this is a gamestate class which draws a screen and buttons and can be used 
+    to get to the testscreen and exit the game
+    
+    args: 
+    screen: the screen
+    state: the gamestate
+    
+    methods:
+    run: this draws the screen with buttons that quit the game or navigate to the test screen 
+    '''
     def __init__(self, screen, state):
         self.state = state
         self.screen = screen
@@ -286,6 +352,14 @@ class startMenu:
             run = False()
 
 class pauseS:
+    '''description: this is the gamestate that draws a screen which has buttons. can restart the game
+    from here or navigate to the main menu.
+    args: 
+    screen = the screen
+    state = current gamestate
+    
+    methods: 
+    run: draws screen, button, switces states'''
     def __init__(self, screen, state):
         self.screen = screen   
         self.state = state
@@ -308,11 +382,15 @@ class pauseS:
 
 
 class gamestate:
+    '''description: the gamestate manager. it can return the current state or change the current state
+    args:
+    state: the current statae
+    methods:
+    check: returns current state
+    change: changes the current state'''
     def __init__(self, state):
         self.state = state
     def check(self):
         return self.state
     def change(self, new_state):
         self.state = new_state
-
-
