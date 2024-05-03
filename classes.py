@@ -238,15 +238,15 @@ class testScreen:
                 starttoggle = True
 
             time = pygame.time.get_ticks()
-            if self.capbtn.btnclick() == 'down' and time - lastcapclick >= 200:
-                lastcapclick = time
+            if self.capbtn.btnclick() == 'down' and time - lastclick >= 200:
+                lastclick = time
                 if cap:
                     cap = False
                 else:
                     cap = True
             
-            if self.puncbtn.btnclick() == 'down' and time - lastcapclick >= 200:
-                lastcapclick = time
+            if self.puncbtn.btnclick() == 'down' and time - lastclick >= 200:
+                lastclick = time
                 if punc:
                     punc = False
                 else:

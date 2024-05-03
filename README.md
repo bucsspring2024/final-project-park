@@ -56,10 +56,66 @@ The test also has "Stats" screen accesible from the main menu, which was suppose
 
 ## ATP
 
-| Step                 |Procedure             |Expected Results                   |
-|----------------------|:--------------------:|----------------------------------:|
-|  1                  | 
+| Step                 |Procedure             |Expected Results                         |
+|----------------------|:--------------------:|----------------------------------------:|
+| 1                    | start game
+|  1                   | press start          |brings you to the test screen            |
+|  2                   | press pause menu     | brings you to pause menu                |
+|  3                   | press main menu      | brings you back to test screen          |
+|  4                   | exit the game        | game closes; states change succesfully  |
+|----------------------|:--------------------:|----------------------------------------:|
+| 1                    | press start          | brings you to the test screen           |
+| 2                    | press start          | sentence is generated on screen         |
+|----------------------|:--------------------:|----------------------------------------:|
+| 1                    | start the "test"     | sentence appears                        |
+| 2                    | type right letters   | the letters appear green                |
+| 3                    | use backspace        | the typed letters stay green            |
+| 4                    | type wrong letters   | sentence turns red                      |
+| 5                    | use backspace        | letters red until mistakes undone       |
+|----------------------|:--------------------:|----------------------------------------:|
+| 1                    | start test           | starts test                             |
+| 2                    | start typing         | letters change color                    |
+| 3                    | hit pause menu       | breaks event loop, changes pause sreen  |
+|----------------------|:--------------------:|----------------------------------------:|
 
-                                              |GUI window appears with count = 0  |
-|  2                   | click count button   | display changes to count = 1      |
-etc...
+## Test Case 1: Button hover colors
+- **Description:** the buttons detect that the mouse is over them. 
+- **Steps**
+- 1. Start the game
+- 2. Hover over the buttons on the main menu 
+- **Expected Result:** the buttons change to a darker shade. 
+
+## Test Case 2: Navigating Menus
+- **Description:** game states change based on button presses without issues.  
+- **Steps**
+- 1. Start the game. 
+- 2. Naviagate back and forth through the main menu, pause menu, and start screen. 
+- **Expected Result:** the states change appropriately. 
+
+## Test Case 3: Generating a sentence and bliting it on screen 
+- **Description:** the sentence class extracts a sentence from a text file and it is displayed on screen. 
+- **Steps**
+- 1. Start the game. 
+- 2. Navigate to test screen and press start
+- **Expected Result:**  a sentence appears.  
+
+## Test Case 4: Screen displays whether typed sentence is correct or not
+- **Description:** the sentence on screen should change color based on what is typed. 
+- **Steps**
+- 1. Start the game, go to start screen and press start. 
+- 2. type a few  letters correctly 
+    - note that I could not get rid of some of the punctuation, and there are spaces between the words and commas. 
+- 3. now try to delete what you typed.
+- 4. type letters incorrectly, and try to use backspace again. 
+
+- **Expected Result:** when characters are typed correclty, they show up in green and cannot be deleted. When typed incorrectly, the sentence becomes red and will stay red until the errors are deleted. 
+
+## Test Case 5: Stopping the game. 
+- **Description:** hitting the pause button will break out of the event loop.  
+- **Steps**
+- 1. Start the game, go to start screen and press start. 
+- 2. start typing. 
+- 3. press pause menu. 
+
+- **Expected Result:** the event loop will be interrupted. unfortunately I wasn't able to create a real pause button, you wont be able to come back to the same screen. 
+
