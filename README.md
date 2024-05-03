@@ -54,29 +54,8 @@ The test also has "Stats" screen accesible from the main menu, which was suppose
 
 - natural language toolkit (https://www.nltk.org/)
 
-## ATP
+### ATP
 
-| Step                 |Procedure             |Expected Results                         |
-|----------------------|:--------------------:|----------------------------------------:|
-| 1                    | start game
-|  1                   | press start          |brings you to the test screen            |
-|  2                   | press pause menu     | brings you to pause menu                |
-|  3                   | press main menu      | brings you back to test screen          |
-|  4                   | exit the game        | game closes; states change succesfully  |
-|----------------------|:--------------------:|----------------------------------------:|
-| 1                    | press start          | brings you to the test screen           |
-| 2                    | press start          | sentence is generated on screen         |
-|----------------------|:--------------------:|----------------------------------------:|
-| 1                    | start the "test"     | sentence appears                        |
-| 2                    | type right letters   | the letters appear green                |
-| 3                    | use backspace        | the typed letters stay green            |
-| 4                    | type wrong letters   | sentence turns red                      |
-| 5                    | use backspace        | letters red until mistakes undone       |
-|----------------------|:--------------------:|----------------------------------------:|
-| 1                    | start test           | starts test                             |
-| 2                    | start typing         | letters change color                    |
-| 3                    | hit pause menu       | breaks event loop, changes pause sreen  |
-|----------------------|:--------------------:|----------------------------------------:|
 
 ## Test Case 1: Button hover colors
 - **Description:** the buttons detect that the mouse is over them. 
